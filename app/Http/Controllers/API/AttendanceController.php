@@ -63,6 +63,9 @@ class AttendanceController extends ApiController
         }else{
           $response['check_out']=null;
         }
+        $response['attendance_count']=Attendance::where('user_id',auth()->user()->id)->where('status','attendance')->count();
+        $response['absence_count']=Attendance::where('user_id',auth()->user()->id)->where('status','absence')->count();
+        $response['vacation_count']=Attendance::where('user_id',auth()->user()->id)->where('status','vacation')->count();
         return $this->sendResponse($response,null,200);
       }
 }
