@@ -41,7 +41,7 @@ class AuthController extends ApiController
                 $user->save();
             }
         }
-        if($user->first_login=='0'){
+        if($user && $user->first_login=='0'){
             $first_login=$user->first_login;
             $user->first_login='1';
             $user->save();
