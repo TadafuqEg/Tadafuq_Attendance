@@ -57,16 +57,15 @@ class AttendanceController extends ApiController
         $response['work_end_time']='05:00 pm';
         $response['work_location']='Al Mohazab Al Halabi - AMMAN - Jordan';
         $attendance=Attendance::where('user_id',auth()->user()->id)->where('date',date('Y-m-d'))->where('status','attendance')->first();
-        dd($attendance,$attendance->check_in);
-        if($attendance && $attendance->chech_in!=null){
-            $response['check_in']=$attendance->chech_in;
+        if($attendance && $attendance->check_in!=null){
+            $response['check_in']=$attendance->check_in;
             $response['user_status']=true;
         }else{
             $response['check_in']=null;
             $response['user_status']=false;
         }
-        if($attendance && $attendance->chech_out!=null){
-          $response['check_out']=$attendance->chech_out;
+        if($attendance && $attendance->check_out!=null){
+          $response['check_out']=$attendance->check_out;
         }else{
           $response['check_out']=null;
         }
