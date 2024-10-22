@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\HomeController;
+use App\Http\Controllers\API\AttendanceController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +26,9 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('/logout',[AuthController::class,'logout'])->name('logout');
     Route::post('/update_password',[AuthController::class,'update_password'])->name('update_password');
     Route::get('/profile',[AuthController::class,'profile'])->name('profile');
-
+    Route::get('/home',[AttendanceController::class,'home'])->name('home');
+    Route::post('/check_in_out',[AttendanceController::class,'check_in_out'])->name('check_in_out');
+    Route::get('/create_attendance',[AttendanceController::class,'create_attendance'])->name('create_attendance');
 });
 
 

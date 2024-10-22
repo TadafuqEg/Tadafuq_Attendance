@@ -55,8 +55,10 @@ class AttendanceController extends ApiController
         $attendance=Attendance::where('user_id',auth()->user()->id)->where('date',date('Y-m-d'))->where('status','attendance')->first();
         if($attendance && $attendance->chech_in!=null){
             $response['check_in']=$attendance->chech_in;
+            $response['user_status']=true;
         }else{
-          $response['check_in']=null;
+            $response['check_in']=null;
+            $response['user_status']=false;
         }
         if($attendance && $attendance->chech_out!=null){
           $response['check_out']=$attendance->chech_out;
@@ -67,5 +69,21 @@ class AttendanceController extends ApiController
         $response['absence_count']=Attendance::where('user_id',auth()->user()->id)->where('status','absence')->count();
         $response['vacation_count']=Attendance::where('user_id',auth()->user()->id)->where('status','vacation')->count();
         return $this->sendResponse($response,null,200);
+      }
+
+      public function create_attendance(){
+        $users = User::whereHas('roles', function ($q) {
+                $q->where('name', 'Client');
+            })
+            ->get();
+        foreach($users as $user){
+          $attendance=Attendance::where('user_id',auth()->user()->id)->where('date',date('Y-m-d'))->first();
+          if(!$attendance){
+            Attendance::craete(['user_id'=>$user->id,
+                                'date'=>date('Y-m-d')
+                                ]);
+          }
+        }
+        return $this->sendResponse(null,'success',200);
       }
 }
