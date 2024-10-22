@@ -55,7 +55,7 @@ class AuthController extends ApiController
            
 
         }else{
-            return $this->sendError(null,"The password is incorrect",400);
+            return $this->sendError(null,"Please verify that your information is correct",400);
            
         }
         
