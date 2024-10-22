@@ -19,6 +19,7 @@ use App\Http\Controllers\API\AttendanceController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/create_attendance',[AttendanceController::class,'create_attendance'])->name('create_attendance');
 //Route::post('/register',[AuthController::class,'register'])->name('register');
 Route::post('/login',[AuthController::class,'login'])->name('login');
 
@@ -28,7 +29,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('/profile',[AuthController::class,'profile'])->name('profile');
     Route::get('/home',[AttendanceController::class,'home'])->name('home');
     Route::post('/check_in_out',[AttendanceController::class,'check_in_out'])->name('check_in_out');
-    Route::get('/create_attendance',[AttendanceController::class,'create_attendance'])->name('create_attendance');
+    
 });
 
 
