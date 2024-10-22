@@ -59,15 +59,18 @@ class AttendanceController extends ApiController
         $attendance=Attendance::where('user_id',auth()->user()->id)->where('date',date('Y-m-d'))->where('status','attendance')->first();
         if($attendance && $attendance->check_in!=null){
             $response['check_in']=$attendance->check_in;
-            $response['user_status']=true;
         }else{
             $response['check_in']=null;
-            $response['user_status']=false;
         }
         if($attendance && $attendance->check_out!=null){
           $response['check_out']=$attendance->check_out;
         }else{
           $response['check_out']=null;
+        }
+        if($attendance && $attendance->check_in!=null && $attendance->check_out==null){
+          $response['user_status']=true;
+        }else{
+          $response['user_status']=false;
         }
         $response['attendance_count']=Attendance::where('user_id',auth()->user()->id)->where('status','attendance')->count();
         $response['absence_count']=Attendance::where('user_id',auth()->user()->id)->where('status','absence')->count();
