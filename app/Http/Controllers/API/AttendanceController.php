@@ -79,7 +79,7 @@ class AttendanceController extends ApiController
         foreach($users as $user){
           $attendance=Attendance::where('user_id',$user->id)->where('date',date('Y-m-d'))->first();
           if(!$attendance){
-            Attendance::craete(['user_id'=>$user->id,
+            Attendance::create(['user_id'=>$user->id,
                                 'date'=>date('Y-m-d')
                                 ]);
           }
