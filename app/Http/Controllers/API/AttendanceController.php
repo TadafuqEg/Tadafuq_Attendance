@@ -32,9 +32,13 @@ class AttendanceController extends ApiController
             if($attendance->check_in==null && $attendance->status=='non'){
                 $attendance->check_in=date('H:i:s');
                 $attendance->status='attendance';
+                $attendance->lat=floatval($request->lat);
+                $attendance->lng=floatval($request->lng);
                 $attendance->save();
             }elseif($attendance->check_out==null && $attendance->status=='attendance'){
               $attendance->check_out=date('H:i:s');
+              $attendance->lat=floatval($request->lat);
+              $attendance->lng=floatval($request->lng);
               $attendance->save();
             }else{
               return $this->sendResponse(null,"you can't check in or check out",200);
