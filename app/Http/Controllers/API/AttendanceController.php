@@ -51,8 +51,8 @@ class AttendanceController extends ApiController
 
       public function home(){
         $user=auth()->user();
-        $user->image=getFirstMediaUrl($user,$user->avatarCollection);
-        $response['user']=$user;
+        $response['user_name']=$user->name;
+        $response['user_image']=getFirstMediaUrl($user,$user->avatarCollection);
         $response['work_start_time']='09:00 am';
         $response['work_end_time']='05:00 pm';
         $response['work_location']='Al Mohazab Al Halabi - AMMAN - Jordan';
