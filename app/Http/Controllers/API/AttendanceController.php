@@ -55,7 +55,7 @@ class AttendanceController extends ApiController
         $response['user_image']=getFirstMediaUrl($user,$user->avatarCollection);
         $response['work_start_time']='09:00 am';
         $response['work_end_time']='05:00 pm';
-        $response['work_location']='12 Ibn Hani Al-Andalusi Street, First District, Nasr City, Cairo Governorate,';
+        $response['work_location']='10 Ibn Hani Al-Andalusi Street, First District, Nasr City, Cairo Governorate,';
         $attendance=Attendance::where('user_id',auth()->user()->id)->where('date',date('Y-m-d'))->where('status','attendance')->first();
         if($attendance && $attendance->check_in!=null){
             $response['check_in']=$attendance->check_in;
